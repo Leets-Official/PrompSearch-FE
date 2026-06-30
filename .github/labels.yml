@@ -1,0 +1,47 @@
+# 라벨(칩) 정의 — push 시 .github/workflows/labels.yml 워크플로우가 GitHub에 자동 동기화합니다.
+# 색상은 # 없이 6자리 hex.
+
+# --- 작업 유형 (Type) ---
+- name: feat
+  color: "0E8A16"
+  description: 새로운 기능
+- name: fix
+  color: "D73A4A"
+  description: 버그 수정
+- name: refactor
+  color: "1D76DB"
+  description: 리팩토링 (기능 변화 없음)
+- name: design
+  color: "E99695"
+  description: UI / 스타일
+- name: docs
+  color: "0075CA"
+  description: 문서
+- name: test
+  color: "FBCA04"
+  description: 테스트 추가/수정
+- name: chore
+  color: "CFD3D7"
+  description: 설정 · 빌드 · 기타
+- name: setup
+  color: "5319E7"
+  description: 프로젝트 환경 설정
+
+# --- 상태 (Status) ---
+- name: "WIP"
+  color: "FEF2C0"
+  description: 작업 진행 중
+- name: "hold"
+  color: "E4E669"
+  description: 보류
+- name: "review-needed"
+  color: "C2E0C6"
+  description: 리뷰 필요
+
+# --- 우선순위 (Priority) ---
+- name: "priority: high"
+  color: "B60205"
+  description: 높음
+- name: "priority: low"
+  color: "BFD4F2"
+  description: 낮음

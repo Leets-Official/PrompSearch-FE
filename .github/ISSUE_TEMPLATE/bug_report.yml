@@ -1,0 +1,35 @@
+name: 🐞 버그 (Bug)
+description: 잘못 동작하는 부분을 신고합니다
+title: "[Fix] "
+labels: ["fix"]
+body:
+  - type: textarea
+    id: describe
+    attributes:
+      label: 버그 설명
+      description: 어떤 문제가 발생하나요?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 재현 방법
+      placeholder: |
+        1. ... 페이지로 이동
+        2. ... 버튼 클릭
+        3. ... 오류 발생
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 기대한 동작
+    validations:
+      required: false
+  - type: textarea
+    id: env
+    attributes:
+      label: 환경 (선택)
+      placeholder: 예) Chrome 125, macOS / iPhone 15
+    validations:
+      required: false

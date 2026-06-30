@@ -1,0 +1,30 @@
+name: ✨ 기능 (Feature)
+description: 새로 추가하거나 개선할 기능을 제안합니다
+title: "[Feat] "
+labels: ["feat"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: 기능 설명
+      description: 어떤 기능인지, 왜 필요한지 적어주세요
+      placeholder: 예) 홈 갤러리에서 태그로 프롬프트를 필터링할 수 있어야 한다
+    validations:
+      required: true
+  - type: textarea
+    id: todo
+    attributes:
+      label: 할 일 (To-do)
+      description: 작업 단위를 체크리스트로 나눠주세요
+      value: |
+        - [ ]
+        - [ ]
+    validations:
+      required: false
+  - type: textarea
+    id: ref
+    attributes:
+      label: 참고 자료
+      description: 디자인 링크, 관련 이슈, 참고 문서 등
+    validations:
+      required: false

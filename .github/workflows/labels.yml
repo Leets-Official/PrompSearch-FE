@@ -1,0 +1,25 @@
+name: Sync labels
+
+# .github/labels.yml 이 main 에 push 되면 GitHub 저장소 라벨을 자동으로 맞춥니다.
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/labels.yml"
+      - ".github/workflows/labels.yml"
+  workflow_dispatch: {}
+
+permissions:
+  issues: write
+
+jobs:
+  labeler:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: crazy-max/ghaction-github-labeler@v5
+        with:
+          yaml-file: .github/labels.yml
+          # 기존 라벨을 지우지 않고 추가/업데이트만 하려면 false 유지.
+          # GitHub 기본 라벨까지 모두 정리하고 싶으면 true 로 바꾸세요.
+          skip-delete: true
