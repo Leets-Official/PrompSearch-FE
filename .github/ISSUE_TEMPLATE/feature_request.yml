@@ -1,6 +1,6 @@
 name: ✨ 기능 (Feature)
 description: 새로 추가하거나 개선할 기능을 제안합니다
-title: "[Feat] "
+title: "[feat/PS-] "
 labels: ["feat"]
 body:
   - type: textarea
