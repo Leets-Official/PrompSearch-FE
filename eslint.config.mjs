@@ -16,6 +16,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // 생성된 파일은 린트 대상에서 제외
+    "public/mockServiceWorker.js",
   ]),
 ]);
 
