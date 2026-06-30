@@ -5,7 +5,7 @@
  * 형식:  type: 제목   (예: feat: 로그인 모달 추가)
  * 제목은 한국어로 작성해도 됩니다.
  */
-export default {
+const config = {
   extends: ["@commitlint/config-conventional"],
   rules: {
     // 우리 라벨(.github/labels.yml)과 동일한 type 목록만 허용.
@@ -35,3 +35,5 @@ export default {
     "header-max-length": [2, "always", 100],
   },
 };
+
+export default config;
