@@ -38,7 +38,7 @@ pnpm typecheck              # 타입 검사
 
 - `main` — 배포 가능한 안정 브랜치 (보호됨)
 - `develop` — 통합 브랜치, 기본 브랜치 (보호됨)
-- `type/PS-<티켓번호>-<설명>` — 작업 브랜치 → `develop` 으로 PR
+- `type/PS-<티켓번호>` — 작업 브랜치 → `develop` 으로 PR
 
 ## 협업 규칙
 
