@@ -1,6 +1,6 @@
 name: 🐞 버그 (Bug)
 description: 잘못 동작하는 부분을 신고합니다
-title: "[Fix] "
+title: "[fix/PS-] "
 labels: ["fix"]
 body:
   - type: textarea
