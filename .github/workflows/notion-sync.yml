@@ -1,0 +1,39 @@
+name: Notion sync
+
+# PR 이벤트가 발생하면 Notion 카드 상태를 동기화합니다.
+#   PR 열림/재오픈 → "진행 중"   |   PR 닫힘/머지 → "완료"
+# 연결 키: 브랜치명 또는 PR 제목 안의 PS-<번호>
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review, closed]
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node .github/scripts/notion-sync.mjs
+        env:
+          # --- 시크릿 (Settings → Secrets → Actions 에 등록) ---
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_DB_ID: ${{ secrets.NOTION_DB_ID }}
+          # --- PR 정보 (자동 주입) ---
+          BRANCH: ${{ github.head_ref }}
+          PR_TITLE: ${{ github.event.pull_request.title }}
+          PR_URL: ${{ github.event.pull_request.html_url }}
+          PR_STATE: ${{ github.event.pull_request.state }}
+          MERGED: ${{ github.event.pull_request.merged }}
+          # --- Notion DB 속성 설정 (DB에 맞게 수정) ---
+          NOTION_ID_PROP: "ID" # 고유 ID 속성 이름
+          NOTION_STATUS_PROP: "상태" # 상태(status 타입) 속성 이름
+          NOTION_PR_PROP: "" # PR 링크를 저장할 URL 속성 이름 (없으면 비워둠)
+          STATUS_IN_PROGRESS: "진행 중" # 열림일 때 상태 옵션명
+          STATUS_DONE: "완료" # 닫힘일 때 상태 옵션명
+          TICKET_PREFIX: "PS" # 고유 ID 접두사
