@@ -1,5 +1,6 @@
 # 라벨(칩) 정의 — push 시 .github/workflows/labels.yml 워크플로우가 GitHub에 자동 동기화합니다.
 # 색상은 # 없이 6자리 hex.
+# (라벨 추가/수정 후 main 에 push 하면 자동 반영됩니다.)
 
 # --- 작업 유형 (Type) ---
 - name: feat
