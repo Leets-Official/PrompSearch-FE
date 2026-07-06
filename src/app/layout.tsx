@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "프롬써치 (PrompSearch)",
+  title: "프롬써치 (PromSearch)",
   description: "아웃풋으로 검색하는 한국형 AI 프롬프트 엔진 & 직군별 커뮤니티 플랫폼",
 };
 
