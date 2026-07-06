@@ -1,4 +1,4 @@
-# 프롬써치 (PrompSearch) — Frontend
+# 프롬써치 (PromSearch) — Frontend
 
 > 아웃풋(Output)으로 검색하는 한국형 AI 프롬프트 엔진 & 직군별 커뮤니티 플랫폼
 
