@@ -35,7 +35,7 @@ const SEMANTICS = [
   ["bg-bg-elevated", "배경 떠있는 면 (white + shadow)"],
   ["bg-bg-brand", "배경 브랜드 (red-500)"],
   ["bg-brand-tint", "브랜드 틴트 (red-500/10%)"],
-  ["bg-dim", "딤 오버레이 (gray-900/30%)"],
+  ["bg-dim", "딤 오버레이 (gray-900/50%)"],
   ["border-stroke-secondary", "테두리 보조 (gray-100)"],
   ["border-stroke-strong", "테두리 강조 (black)"],
 ] as const;
