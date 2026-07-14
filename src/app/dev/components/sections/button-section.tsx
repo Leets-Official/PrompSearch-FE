@@ -1,126 +1,155 @@
 "use client";
 
-import { useState } from "react";
-import { CopyIcon, HeartIcon } from "lucide-react";
+import { BellIcon, PencilIcon } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+import { SocialLoginButton } from "@/components/ui/social-login-button";
 
-import { DemoSection } from "../demo-section";
+import { SpecCell, SpecGroup, SpecSection } from "./spec";
 
-const VARIANT_CODE = `
-import { Button } from "@/components/ui/button";
+/**
+ * Button 스펙 시트 (Figma Button 섹션 309:1898).
+ * hover/pressed 는 실제 상호작용 상태라 정적으로 보이도록 각 상태의 토큰 클래스를
+ * className 으로 강제 적용해 나열합니다(문서용). disabled 는 실제 disabled prop.
+ */
 
-<Button>브랜드 (기본)</Button>
-<Button variant="neutral">중립</Button>
-<Button variant="outline">아웃라인</Button>
-<Button variant="ghost">고스트</Button>
-<Button variant="destructive">삭제</Button>
-<Button variant="link">링크</Button>
-<Button disabled>비활성</Button>
-`;
+// 상태별 강제 클래스 (컴포넌트 내부 hover:/active: 규칙과 동일한 토큰)
+const BRAND_SOLID = {
+  hover: "bg-interaction-brand-hover shadow-[0_4px_8px_rgb(35_35_33/0.13)]",
+  pressed: "bg-interaction-brand-pressed",
+};
+const BRAND_GHOST = {
+  hover: "border-interaction-brand-hover shadow-[0_4px_8px_rgb(35_35_33/0.13)]",
+  pressed: "border-interaction-brand-pressed bg-brand-tint",
+};
+const NEUTRAL = {
+  hover: "bg-interaction-neutral-hover shadow-[0_4px_8px_rgb(35_35_33/0.13)]",
+  pressed: "bg-interaction-neutral-pressed",
+};
 
-const SIZE_CODE = `
-<Button size="sm">작게</Button>
-<Button size="default">기본</Button>
-<Button size="lg">크게</Button>
-<Button size="icon" aria-label="복사">
-  <CopyIcon />
-</Button>
-<Button disabled>
-  <Spinner /> 저장 중…
-</Button>
-`;
-
-const CHIP_CODE = `
-// IA의 "필터 (직군/태스크)" — neutral 버튼 + aria-pressed 로 선택 상태 표현
-// 선택 색은 Interaction/Neutral/selected (red-400/25%) 토큰이 자동 적용됩니다.
-const [selected, setSelected] = useState<string[]>([]);
-
-{["개발", "디자인", "마케팅", "기획"].map((job) => (
-  <Button
-    key={job}
-    variant="neutral"
-    size="sm"
-    aria-pressed={selected.includes(job)}
-    onClick={() => toggle(job)}
-  >
-    {job}
-  </Button>
-))}
-`;
+function Label() {
+  return (
+    <>
+      <PencilIcon /> Button
+    </>
+  );
+}
 
 export function ButtonSection() {
-  const [selected, setSelected] = useState<string[]>(["디자인"]);
-  const [liked, setLiked] = useState(false);
-
-  const toggle = (job: string) =>
-    setSelected((prev) => (prev.includes(job) ? prev.filter((j) => j !== job) : [...prev, job]));
-
   return (
-    <div className="space-y-10">
-      <DemoSection
-        id="button-variants"
-        title="Button — variant"
-        description="색상은 디자인 시스템 Interaction 토큰(brand: 500→hover 400→pressed 600, neutral: gray-200→white→gray-300)을 따릅니다. 눌러보면 pressed 색 변화를 확인할 수 있어요."
-        code={VARIANT_CODE}
-      >
-        <Button>브랜드 (기본)</Button>
-        <Button variant="neutral">중립</Button>
-        <Button variant="outline">아웃라인</Button>
-        <Button variant="ghost">고스트</Button>
-        <Button variant="destructive">삭제</Button>
-        <Button variant="link">링크</Button>
-        <Button disabled>비활성</Button>
-      </DemoSection>
+    <SpecSection id="button" label="Button">
+      {/* Brand — solid / ghost, size 48 & 36 */}
+      <SpecGroup title="Brand — solid · ghost (size 48 / 36)">
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-wrap items-start gap-6">
+            <SpecCell label="default">
+              <Button size="lg">
+                <Label />
+              </Button>
+            </SpecCell>
+            <SpecCell label="hover">
+              <Button size="lg" className={BRAND_SOLID.hover}>
+                <Label />
+              </Button>
+            </SpecCell>
+            <SpecCell label="pressed">
+              <Button size="lg" className={BRAND_SOLID.pressed}>
+                <Label />
+              </Button>
+            </SpecCell>
+            <SpecCell label="disabled">
+              <Button size="lg" disabled>
+                <Label />
+              </Button>
+            </SpecCell>
+          </div>
+          <div className="flex flex-wrap items-start gap-6">
+            <SpecCell label="ghost default">
+              <Button variant="ghost" size="lg">
+                <Label />
+              </Button>
+            </SpecCell>
+            <SpecCell label="ghost hover">
+              <Button variant="ghost" size="lg" className={BRAND_GHOST.hover}>
+                <Label />
+              </Button>
+            </SpecCell>
+            <SpecCell label="ghost pressed">
+              <Button variant="ghost" size="lg" className={BRAND_GHOST.pressed}>
+                <Label />
+              </Button>
+            </SpecCell>
+            <SpecCell label="ghost disabled">
+              <Button variant="ghost" size="lg" disabled>
+                <Label />
+              </Button>
+            </SpecCell>
+          </div>
+          <div className="flex flex-wrap items-start gap-6">
+            <SpecCell label="sm solid">
+              <Button size="sm">
+                <Label />
+              </Button>
+            </SpecCell>
+            <SpecCell label="sm ghost">
+              <Button variant="ghost" size="sm">
+                <Label />
+              </Button>
+            </SpecCell>
+          </div>
+        </div>
+      </SpecGroup>
 
-      <DemoSection
-        id="button-sizes"
-        title="Button — size · 아이콘 · 로딩"
-        description="크기는 아직 컴포넌트 시안이 없어 초안값입니다. 아이콘 버튼(복사·추천 등)과 로딩 상태 조합 예시."
-        code={SIZE_CODE}
-      >
-        <Button size="sm">작게</Button>
-        <Button size="default">기본</Button>
-        <Button size="lg">크게</Button>
-        <Button size="icon" aria-label="복사">
-          <CopyIcon />
-        </Button>
-        <Button
-          variant="neutral"
-          size="icon"
-          aria-label="추천"
-          aria-pressed={liked}
-          onClick={() => setLiked((v) => !v)}
-        >
-          <HeartIcon className={liked ? "fill-red-500 text-red-500" : undefined} />
-        </Button>
-        <Button disabled>
-          <Spinner /> 저장 중…
-        </Button>
-      </DemoSection>
-
-      <DemoSection
-        id="button-chips"
-        title="필터 칩 (직군/태스크)"
-        description="IA의 탐색 > 필터 유스케이스. neutral variant + aria-pressed 로 선택 상태(red-400/25%)를 표현합니다."
-        code={CHIP_CODE}
-      >
-        {["개발", "디자인", "마케팅", "기획"].map((job) => (
-          <Button
-            key={job}
-            variant="neutral"
-            size="sm"
-            aria-pressed={selected.includes(job)}
-            onClick={() => toggle(job)}
-          >
-            {job}
+      {/* Neutral — size 48 & 36 */}
+      <SpecGroup title="Neutral (size 48 / 36)">
+        <SpecCell label="default">
+          <Button variant="neutral" size="lg">
+            <Label />
           </Button>
-        ))}
-        <span className="text-caption-1 text-text-disabled">
-          선택됨: {selected.length ? selected.join(", ") : "없음"}
-        </span>
-      </DemoSection>
-    </div>
+        </SpecCell>
+        <SpecCell label="hover">
+          <Button variant="neutral" size="lg" className={NEUTRAL.hover}>
+            <Label />
+          </Button>
+        </SpecCell>
+        <SpecCell label="pressed">
+          <Button variant="neutral" size="lg" className={NEUTRAL.pressed}>
+            <Label />
+          </Button>
+        </SpecCell>
+        <SpecCell label="disabled">
+          <Button variant="neutral" size="lg" disabled>
+            <Label />
+          </Button>
+        </SpecCell>
+        <SpecCell label="sm">
+          <Button variant="neutral" size="sm">
+            <Label />
+          </Button>
+        </SpecCell>
+      </SpecGroup>
+
+      {/* Icon 버튼 (44x44) — Figma Button/Icon: 투명 default + 회색 배경(pressed) */}
+      <SpecGroup title="Icon (44 × 44)">
+        <SpecCell label="default">
+          <Button variant="plain" size="icon" aria-label="알림">
+            <BellIcon />
+          </Button>
+        </SpecCell>
+        <SpecCell label="pressed">
+          <Button variant="plain" size="icon" aria-label="알림" className="bg-bg-secondary">
+            <BellIcon />
+          </Button>
+        </SpecCell>
+      </SpecGroup>
+
+      {/* 소셜 로그인 */}
+      <SpecGroup title="소셜 로그인" className="flex-col items-stretch sm:flex-row">
+        <div className="w-full max-w-xs space-y-3">
+          <SocialLoginButton provider="google" />
+          <SocialLoginButton provider="kakao" />
+        </div>
+      </SpecGroup>
+    </SpecSection>
   );
 }
