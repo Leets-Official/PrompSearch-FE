@@ -41,14 +41,39 @@ function SelectTrigger({
       data-slot="select-trigger"
       data-size={size}
       className={cn(
-        "flex w-fit items-center justify-between gap-1.5 rounded-lg border border-input bg-transparent py-2 pr-2 pl-2.5 text-sm whitespace-nowrap transition-colors outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 data-placeholder:text-muted-foreground data-[size=default]:h-8 data-[size=sm]:h-7 data-[size=sm]:rounded-[min(var(--radius-md),10px)] *:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5 dark:bg-input/30 dark:hover:bg-input/50 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4",
+        // 레이아웃/형태: Figma Dropdown 트리거 — Radius/md(8) → rounded-md,
+        // 가로 패딩 Spacing/xl(16) → px-4, Body 1(16/24) 타이포, bg-bg-primary
+        "flex w-full items-center justify-between gap-2 rounded-md border bg-bg-primary px-4 text-body-1 whitespace-nowrap transition-colors outline-none select-none",
+        // 사이즈: default=48(시안), sm=36 (가로 패딩만 소폭 축소)
+        "data-[size=default]:h-12 data-[size=sm]:h-9 data-[size=sm]:px-3",
+        // default 상태: 테두리 stroke-disabled(#adaca7)
+        "border-stroke-disabled",
+        // hover 상태: 테두리 stroke-strong(#000)
+        "hover:border-stroke-strong",
+        // active(열림) 상태: base-ui data-popup-open — 테두리 강조 + 드롭섀도(Interaction effect)
+        "data-popup-open:border-stroke-strong data-popup-open:shadow-md",
+        // 값/placeholder 텍스트 색: 값=text-primary(기본), placeholder=text-disabled
+        "text-text-primary data-placeholder:text-text-disabled",
+        // 포커스 링(기존 컴포넌트 공통 패턴)
+        "focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50",
+        // 비활성: stroke-disabled 유지 + 상호작용 차단
+        "disabled:cursor-not-allowed disabled:opacity-50",
+        // 오류(aria-invalid) 상태
+        "aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20",
+        // select-value 내부 정렬
+        "*:data-[slot=select-value]:line-clamp-1 *:data-[slot=select-value]:flex *:data-[slot=select-value]:items-center *:data-[slot=select-value]:gap-1.5",
+        // 아이콘 기본 처리
+        "[&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-5",
         className,
       )}
       {...props}
     >
       {children}
+      {/* 화살표 아이콘: 열림 시 base-ui가 data-popup-open을 부여 → 위로 회전 */}
       <SelectPrimitive.Icon
-        render={<ChevronDownIcon className="pointer-events-none size-4 text-muted-foreground" />}
+        render={
+          <ChevronDownIcon className="pointer-events-none size-5 shrink-0 text-text-primary transition-transform data-popup-open:rotate-180" />
+        }
       />
     </SelectPrimitive.Trigger>
   );
