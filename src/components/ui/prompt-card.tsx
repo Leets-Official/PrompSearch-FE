@@ -68,7 +68,7 @@ function PromptCard({
       <div data-slot="prompt-card-body" className="flex w-full flex-col gap-1">
         <p className="w-full truncate text-heading-2 text-text-primary">{title}</p>
         {description ? (
-          <p className="line-clamp-2 text-body-2 text-text-secondary">{description}</p>
+          <p className="line-clamp-2 text-body-3 text-text-secondary">{description}</p>
         ) : null}
       </div>
 
@@ -91,7 +91,7 @@ function PromptCard({
             {author.avatarSrc ? <AvatarImage src={author.avatarSrc} alt={author.name} /> : null}
             <AvatarFallback>{author.name.charAt(0)}</AvatarFallback>
           </Avatar>
-          <span className="truncate text-body-2 text-text-secondary">{author.name}</span>
+          <span className="truncate text-body-3 text-text-secondary">{author.name}</span>
         </div>
       ) : null}
     </>

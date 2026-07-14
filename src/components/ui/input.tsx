@@ -35,7 +35,7 @@ function Input({ className, type, ...props }: React.ComponentProps<"input">) {
         // success : data-success 시 파란 테두리 — 성공 전용 색이라 시맨틱 토큰 없음(#005eeb 하드코딩)
         "data-success:border-[#005eeb] hover:data-success:border-[#005eeb] focus-visible:data-success:border-[#005eeb]",
         // file input 잔여 스타일(기존 동작 유지)
-        "file:inline-flex file:h-8 file:border-0 file:bg-transparent file:text-body-2 file:font-medium file:text-text-primary",
+        "file:inline-flex file:h-8 file:border-0 file:bg-transparent file:text-body-3 file:font-medium file:text-text-primary",
         className,
       )}
       {...props}

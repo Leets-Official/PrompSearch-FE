@@ -59,7 +59,7 @@ export default function ComponentsGalleryPage() {
       </header>
 
       <main className="mx-auto max-w-5xl space-y-10 px-6 py-10">
-        <p className="rounded-lg border border-stroke-secondary bg-bg-elevated p-4 text-body-2 text-text-secondary">
+        <p className="rounded-lg border border-stroke-secondary bg-bg-elevated p-4 text-body-3 text-text-secondary">
           디자이너 Figma 컴포넌트 시안을{" "}
           <strong className="text-text-primary">상태별 스펙 시트</strong>로 재현한 페이지입니다.
           hover·pressed·active 같은 상호작용 상태는 문서 목적상 해당 상태의 토큰을 정적으로 적용해
