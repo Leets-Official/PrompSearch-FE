@@ -112,7 +112,7 @@
   --color-bg-secondary: var(--color-gray-100);
   --color-bg-elevated: var(--color-white); /* +shadow 는 컴포넌트에서 shadow 유틸로 */
   --color-bg-brand: var(--color-brand);
-  --color-bg-disabled: var(--color-gray-200);
+  --color-bg-disabled: var(--color-gray-150); /* Background/disabled #ececec */
 
   /* Stroke */
   --color-stroke-primary: var(--color-gray-50);
@@ -126,14 +126,14 @@
   --color-interaction-brand: var(--color-red-500);
   --color-interaction-brand-hover: var(--color-red-400);
   --color-interaction-brand-pressed: var(--color-red-600);
-  --color-interaction-brand-disabled: var(--color-gray-200); /* = Background/disabled */
+  --color-interaction-brand-disabled: var(--color-gray-150); /* = Background/disabled #ececec */
 
   /* Interaction / Neutral */
   --color-interaction-neutral: var(--color-gray-200);
   --color-interaction-neutral-hover: var(--color-white);
   --color-interaction-neutral-pressed: var(--color-gray-300);
   --color-interaction-neutral-selected: rgb(255 110 121 / 25%); /* red-400 / 25% */
-  --color-interaction-neutral-disabled: var(--color-gray-200); /* = Background/disabled */
+  --color-interaction-neutral-disabled: var(--color-gray-150); /* = Background/disabled #ececec */
 
   /* Font */
   --font-sans: var(--font-pretendard), "Pretendard Variable", Pretendard, sans-serif;
