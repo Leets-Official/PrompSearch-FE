@@ -79,12 +79,16 @@
   --text-title-3--font-weight: 600;
 
   --text-body-1: 1rem;
-  --text-body-1--line-height: 1.5rem;
+  --text-body-1--line-height: 1.875rem; /* 2026.07.14 수정: 24 → 30 (본문 행간 확대) */
   --text-body-1--font-weight: 400;
 
-  --text-body-2: 0.875rem;
-  --text-body-2--line-height: 1.25rem;
-  --text-body-2--font-weight: 400;
+  --text-body-2: 1rem; /* 2026.07.14 수정: 14/20/Regular → 16/24/Medium */
+  --text-body-2--line-height: 1.5rem;
+  --text-body-2--font-weight: 500;
+
+  --text-body-3: 0.875rem; /* 2026.07.14 신규: 14/24/Regular (기존 body-2 역할) */
+  --text-body-3--line-height: 1.5rem;
+  --text-body-3--font-weight: 400;
 
   --text-caption-1: 0.75rem;
   --text-caption-1--line-height: 1rem;
@@ -112,28 +116,29 @@
   --color-bg-secondary: var(--color-gray-100);
   --color-bg-elevated: var(--color-white); /* +shadow 는 컴포넌트에서 shadow 유틸로 */
   --color-bg-brand: var(--color-brand);
-  --color-bg-disabled: var(--color-gray-200);
+  --color-bg-disabled: var(--color-gray-150); /* Background/disabled #ececec */
 
   /* Stroke */
   --color-stroke-primary: var(--color-gray-50);
   --color-stroke-secondary: var(--color-gray-100);
-  --color-stroke-strong: var(--color-black);
+  --color-stroke-strong: var(--color-gray-700); /* 2026.07.14 수정: black → gray-700 */
   --color-stroke-brand: var(--color-brand);
   --color-stroke-disabled: var(--color-gray-400);
   --color-stroke-on-brand: var(--color-white);
+  --color-stroke-black: var(--color-black); /* 2026.07.14 추가: 순수 black 이 필요한 곳용 */
 
   /* Interaction / Brand */
   --color-interaction-brand: var(--color-red-500);
   --color-interaction-brand-hover: var(--color-red-400);
   --color-interaction-brand-pressed: var(--color-red-600);
-  --color-interaction-brand-disabled: var(--color-gray-200); /* = Background/disabled */
+  --color-interaction-brand-disabled: var(--color-gray-150); /* = Background/disabled #ececec */
 
   /* Interaction / Neutral */
   --color-interaction-neutral: var(--color-gray-200);
   --color-interaction-neutral-hover: var(--color-white);
   --color-interaction-neutral-pressed: var(--color-gray-300);
   --color-interaction-neutral-selected: rgb(255 110 121 / 25%); /* red-400 / 25% */
-  --color-interaction-neutral-disabled: var(--color-gray-200); /* = Background/disabled */
+  --color-interaction-neutral-disabled: var(--color-gray-150); /* = Background/disabled #ececec */
 
   /* Font */
   --font-sans: var(--font-pretendard), "Pretendard Variable", Pretendard, sans-serif;

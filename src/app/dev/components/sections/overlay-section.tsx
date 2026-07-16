@@ -127,7 +127,7 @@ export function OverlaySection() {
             </DialogHeader>
             <div className="space-y-3">
               {Array.from({ length: 30 }, (_, i) => (
-                <p key={i} className="text-body-2 text-text-secondary">
+                <p key={i} className="text-body-3 text-text-secondary">
                   {i + 1}. 모달 내부 스크롤 확인용 문단입니다. 배경은 스크롤되지 않아야 합니다.
                 </p>
               ))}

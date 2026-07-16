@@ -20,7 +20,7 @@ export function DemoSection({
   return (
     <section id={id} className="scroll-mt-20">
       <h2 className="text-heading-2 text-text-primary">{title}</h2>
-      {description && <p className="mt-1 text-body-2 text-text-secondary">{description}</p>}
+      {description && <p className="mt-1 text-body-3 text-text-secondary">{description}</p>}
       <div className="mt-3 flex flex-wrap items-center gap-4 rounded-xl border border-stroke-secondary bg-bg-elevated p-6 shadow-sm">
         {children}
       </div>

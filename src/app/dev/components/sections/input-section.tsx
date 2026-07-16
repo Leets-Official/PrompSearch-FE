@@ -1,120 +1,100 @@
 "use client";
 
-import { SearchIcon } from "lucide-react";
+import type { ReactNode } from "react";
+import { CheckIcon, CircleAlertIcon } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { SearchBar } from "@/components/ui/search-bar";
 import { Textarea } from "@/components/ui/textarea";
 
-import { DemoSection } from "../demo-section";
+import { SpecCell, SpecGroup, SpecSection } from "./spec";
 
-const SEARCH_CODE = `
-import { SearchIcon } from "lucide-react";
-import { Input } from "@/components/ui/input";
+/**
+ * Input 스펙 시트 (Figma Input 섹션 309:1873).
+ * 디자이너 "Text Input" 은 Title* 라벨 + 인풋 + Caption 이 한 세트 → Field 로 재현.
+ * hover/active 상태는 인풋 내부 규칙과 동일한 토큰을 className 으로 강제 적용(문서용).
+ */
 
-// IA의 "검색 바" — 아이콘은 래퍼에 절대 배치
-<div className="relative w-full max-w-sm">
-  <SearchIcon className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-text-disabled" />
-  <Input type="search" placeholder="아웃풋으로 검색해 보세요" className="pl-8" />
-</div>
-`;
+const FOCUS_SHADOW = "shadow-[0px_4px_8px_rgba(35,33,33,0.13)]";
 
-const FORM_CODE = `
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-
-// 업로드 폼 필드 — Label 의 htmlFor 와 Input 의 id 를 반드시 연결
-<div className="grid w-full max-w-sm gap-1.5">
-  <Label htmlFor="title">제목</Label>
-  <Input id="title" placeholder="프롬프트 제목" />
-</div>
-
-<div className="grid w-full max-w-sm gap-1.5">
-  <Label htmlFor="prompt">프롬프트 본문</Label>
-  <Textarea id="prompt" placeholder="프롬프트 내용을 붙여넣으세요" />
-</div>
-
-// 에러 상태는 aria-invalid 로 (react-hook-form 연동 시 자동)
-<Input aria-invalid placeholder="제목을 입력해 주세요" />
-`;
-
-const SELECT_CODE = `
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-
-<Select>
-  <SelectTrigger className="w-40">
-    <SelectValue placeholder="직군 선택" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="dev">개발</SelectItem>
-    <SelectItem value="design">디자인</SelectItem>
-    <SelectItem value="marketing">마케팅</SelectItem>
-    <SelectItem value="pm">기획</SelectItem>
-  </SelectContent>
-</Select>
-`;
+// Title* + 필드 + Caption 세트
+function Field({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="w-full max-w-xs space-y-1.5">
+      <span className="flex items-center gap-0.5 text-title-3 text-text-primary">
+        Title <span className="text-text-brand">*</span>
+      </span>
+      {children}
+      <p className="text-caption-1 text-text-disabled">{label}</p>
+    </div>
+  );
+}
 
 export function InputSection() {
   return (
-    <div className="space-y-10">
-      <DemoSection
-        id="input-search"
-        title="검색 바"
-        description="IA의 탐색 > 검색 바 유스케이스. 포커스 링은 brand 토큰(red-500)이 적용됩니다."
-        code={SEARCH_CODE}
-      >
-        <div className="relative w-full max-w-sm">
-          <SearchIcon className="absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-text-disabled" />
-          <Input type="search" placeholder="아웃풋으로 검색해 보세요" className="pl-8" />
-        </div>
-      </DemoSection>
+    <SpecSection id="input" label="Input">
+      {/* Text Input — 7 states */}
+      <SpecGroup title="Text Input" className="flex-col items-stretch gap-6">
+        <Field label="default">
+          <Input placeholder="Placeholder" />
+        </Field>
+        <Field label="hover">
+          <Input placeholder="Placeholder" className="border-stroke-strong" />
+        </Field>
+        <Field label="active">
+          <Input placeholder="Placeholder" className={`border-stroke-strong ${FOCUS_SHADOW}`} />
+        </Field>
+        <Field label="filled">
+          <Input defaultValue="Placeholder" />
+        </Field>
+        <Field label="disabled">
+          <Input placeholder="Placeholder" disabled />
+        </Field>
+        <Field label="error">
+          <div className="relative">
+            <Input aria-invalid defaultValue="Placeholder" className="pr-11" />
+            <CircleAlertIcon className="absolute top-1/2 right-4 size-5 -translate-y-1/2 text-red-500" />
+          </div>
+        </Field>
+        <Field label="success">
+          <div className="relative">
+            <Input data-success defaultValue="Placeholder" className="pr-11" />
+            <CheckIcon className="absolute top-1/2 right-4 size-5 -translate-y-1/2 text-[#005eeb]" />
+          </div>
+        </Field>
+      </SpecGroup>
 
-      <DemoSection
-        id="input-form"
-        title="Input · Textarea · Label"
-        description="업로드 폼(제목/본문 작성) 유스케이스. 에러 상태는 aria-invalid 속성으로 — react-hook-form 과 연동하면 자동으로 붙습니다."
-        code={FORM_CODE}
-      >
-        <div className="grid w-full max-w-sm gap-1.5">
-          <Label htmlFor="demo-title">제목</Label>
-          <Input id="demo-title" placeholder="프롬프트 제목" />
-        </div>
-        <div className="grid w-full max-w-sm gap-1.5">
-          <Label htmlFor="demo-prompt">프롬프트 본문</Label>
-          <Textarea id="demo-prompt" placeholder="프롬프트 내용을 붙여넣으세요" />
-        </div>
-        <div className="grid w-full max-w-sm gap-1.5">
-          <Label htmlFor="demo-error">에러 상태</Label>
-          <Input id="demo-error" aria-invalid placeholder="제목을 입력해 주세요" />
-        </div>
-      </DemoSection>
+      {/* Text Area — 5 states */}
+      <SpecGroup title="Text Area" className="flex-col items-stretch gap-6">
+        <Field label="default">
+          <Textarea placeholder="Placeholder" />
+        </Field>
+        <Field label="active">
+          <Textarea placeholder="Placeholder" className={`border-stroke-strong ${FOCUS_SHADOW}`} />
+        </Field>
+        <Field label="filled">
+          <Textarea defaultValue="Placeholder" />
+        </Field>
+        <Field label="disabled">
+          <Textarea placeholder="Placeholder" disabled />
+        </Field>
+      </SpecGroup>
 
-      <DemoSection
-        id="input-select"
-        title="Select"
-        description="업로드 폼의 태그(직군) 선택 유스케이스. 팝업은 포털로 떠서 z-index 걱정 없이 동작합니다."
-        code={SELECT_CODE}
-      >
-        <Select>
-          <SelectTrigger className="w-40">
-            <SelectValue placeholder="직군 선택" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="dev">개발</SelectItem>
-            <SelectItem value="design">디자인</SelectItem>
-            <SelectItem value="marketing">마케팅</SelectItem>
-            <SelectItem value="pm">기획</SelectItem>
-          </SelectContent>
-        </Select>
-      </DemoSection>
-    </div>
+      {/* Search Bar — 4 states */}
+      <SpecGroup title="Search Bar" className="flex-col items-start gap-4">
+        <SpecCell label="default" className="items-start">
+          <SearchBar placeholder="Placeholder" />
+        </SpecCell>
+        <SpecCell label="hover" className="items-start">
+          <SearchBar placeholder="Placeholder" className="border-stroke-strong" />
+        </SpecCell>
+        <SpecCell label="active" className="items-start">
+          <SearchBar placeholder="Placeholder" className={`border-stroke-strong ${FOCUS_SHADOW}`} />
+        </SpecCell>
+        <SpecCell label="filled" className="items-start">
+          <SearchBar defaultValue="Placeholder" />
+        </SpecCell>
+      </SpecGroup>
+    </SpecSection>
   );
 }

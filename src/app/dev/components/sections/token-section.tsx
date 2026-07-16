@@ -48,8 +48,9 @@ const TYPO = [
   ["text-title-1", "Title 1 — 16/20 SemiBold"],
   ["text-title-2", "Title 2 — 16/20 Medium"],
   ["text-title-3", "Title 3 — 14/20 SemiBold"],
-  ["text-body-1", "Body 1 — 16/24 Regular"],
-  ["text-body-2", "Body 2 — 14/20 Regular"],
+  ["text-body-1", "Body 1 — 16/30 Regular"],
+  ["text-body-2", "Body 2 — 16/24 Medium"],
+  ["text-body-3", "Body 3 — 14/24 Regular"],
   ["text-caption-1", "Caption 1 — 12/16 SemiBold"],
 ] as const;
 
@@ -66,7 +67,7 @@ export function TokenSection() {
   return (
     <section id="tokens" className="scroll-mt-20">
       <h2 className="text-heading-2 text-text-primary">디자인 토큰</h2>
-      <p className="mt-1 text-body-2 text-text-secondary">
+      <p className="mt-1 text-body-3 text-text-secondary">
         globals.css 에 정의된 primitive / semantic 토큰. 색은 되도록{" "}
         <code className="rounded bg-bg-secondary px-1 py-0.5 font-mono text-caption-1">
           text-text-*
@@ -95,7 +96,7 @@ export function TokenSection() {
           <h3 className="mb-2 text-title-3 text-text-secondary">Semantic (자주 쓰는 것)</h3>
           <ul className="grid gap-1 sm:grid-cols-2">
             {SEMANTICS.map(([cls, desc]) => (
-              <li key={cls} className="text-body-2 text-text-secondary">
+              <li key={cls} className="text-body-3 text-text-secondary">
                 <code className="rounded bg-bg-secondary px-1 py-0.5 font-mono text-caption-1 text-text-primary">
                   {cls}
                 </code>{" "}
