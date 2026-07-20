@@ -19,7 +19,8 @@ export default function MainLayout({ children }: { children: ReactNode }) {
     <div className="min-h-dvh bg-bg-primary">
       <div className="mx-auto flex w-full max-w-7xl flex-col">
         <GalleryTopBar />
-        <div className="flex gap-8 px-6 py-8">
+        {/* 시안 좌우 여백 80px(px-20) — 헤더와 동일하게 맞춰 사이드바/콘텐츠가 로고/검색과 정렬된다. */}
+        <div className="flex gap-8 px-20 py-8">
           <aside className="hidden shrink-0 lg:block">
             <CategoryNav />
           </aside>
