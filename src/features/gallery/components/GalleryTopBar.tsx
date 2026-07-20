@@ -1,0 +1,65 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { PencilIcon } from "lucide-react";
+
+import { AppHeader } from "@/components/ui/app-header";
+import { Button } from "@/components/ui/button";
+import { Logo } from "@/components/ui/logo";
+import { SearchBar } from "@/components/ui/search-bar";
+import { useAuthStatus } from "@/hooks/use-auth-status";
+import { useGalleryFilters } from "@/features/gallery/hooks/use-gallery-filters";
+
+import { HeaderAuthArea } from "./HeaderAuthArea";
+
+const SEARCH_DEBOUNCE_MS = 300;
+
+/**
+ * 홈 상단바 — 로고 · 검색 · 업로드 · (인증영역).
+ * 검색 입력은 디바운스 후 URL `q` 로 반영한다(입력값이 현재 값과 다를 때만 → 마운트 시 page 리셋 방지).
+ */
+export function GalleryTopBar() {
+  const { query, setSearch } = useGalleryFilters();
+  const { isAuthenticated, user } = useAuthStatus();
+  const [keyword, setKeyword] = useState(query.q);
+
+  useEffect(() => {
+    if (keyword === query.q) return;
+    const timer = setTimeout(() => setSearch(keyword), SEARCH_DEBOUNCE_MS);
+    return () => clearTimeout(timer);
+  }, [keyword, query.q, setSearch]);
+
+  return (
+    <AppHeader
+      // 로고 영역 폭 = 사이드바 폭(w-50) → 로고가 사이드바 위로 정렬되고,
+      // 헤더 gap-8(로고~검색) 과 본문 gap-8(사이드바~갤러리) 이 같아 검색창·본문 좌측이 정렬된다.
+      start={
+        <div className="flex w-50 items-center">
+          <Logo variant="horizontal" />
+        </div>
+      }
+      center={
+        <SearchBar
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          placeholder="검색어를 입력해주세요"
+          aria-label="프롬프트 검색"
+          className="max-w-none flex-1"
+        />
+      }
+      end={
+        <>
+          {/* 업로드: 시안 = 브랜드 아웃라인(빨간 테두리+빨간 글자) + 연필 아이콘, h-48(size lg).
+              비회원 로그인 게이트·업로드 폼은 CRUD 브랜치. 지금은 경로 링크만.
+              render 로 <a>(Link) 를 쓰므로 nativeButton=false */}
+          <Button variant="ghost" size="lg" nativeButton={false} render={<Link href="/upload" />}>
+            <PencilIcon />
+            업로드
+          </Button>
+          <HeaderAuthArea isAuthenticated={isAuthenticated} user={user} />
+        </>
+      }
+    />
+  );
+}
