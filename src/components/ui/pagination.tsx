@@ -22,15 +22,15 @@ import { cn } from "@/lib/utils";
 
 // 버튼 1칸 공통 스타일. selected/default 상태는 cva variant로, pressed/hover는 CSS 상태로 매핑.
 const paginationButtonVariants = cva(
-  "inline-flex size-9 shrink-0 items-center justify-center rounded-sm border border-transparent text-title-2 outline-none transition-all select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:text-text-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-5",
+  "inline-flex size-9 shrink-0 items-center justify-center rounded-[4px] border border-transparent text-title-2 outline-none transition-all select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:text-text-disabled [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-5",
   {
     variants: {
       isActive: {
         // selected: 브랜드 채움 + 브랜드 보더 + 브랜드 텍스트
         true: "border-stroke-brand bg-interaction-neutral-selected text-text-brand",
-        // default: 무채색 텍스트, hover/pressed는 neutral interaction 토큰
-        false:
-          "text-text-secondary hover:bg-interaction-neutral-hover active:bg-interaction-neutral-pressed",
+        // default: 무채색 텍스트. hover 는 투명 배경 위라 흰색(neutral-hover)이면 안 보여서
+        // 회색(bg-secondary) 으로 노출, pressed 는 gray-300.
+        false: "text-text-secondary hover:bg-bg-secondary active:bg-interaction-neutral-pressed",
       },
     },
     defaultVariants: {
