@@ -24,7 +24,7 @@ function PromptCardTag({ label }: { label: string }) {
   return (
     <span
       data-slot="prompt-card-tag"
-      className="inline-flex items-center justify-center rounded-lg bg-brand-tint px-2 py-1.5 text-caption-1 text-text-brand"
+      className="inline-flex items-center justify-center rounded-[4px] bg-brand-tint px-2 py-1.5 text-caption-1 text-text-brand"
     >
       {label}
     </span>

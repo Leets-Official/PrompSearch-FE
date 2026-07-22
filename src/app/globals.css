@@ -68,11 +68,13 @@
 
   --text-title-1: 1rem;
   --text-title-1--line-height: 1.25rem;
-  --text-title-1--font-weight: 600;
+  /* 시안 Title 1 = Bold(700) (get_design_context 확인). 기존 600 은 오식이었음 */
+  --text-title-1--font-weight: 700;
 
   --text-title-2: 1rem;
   --text-title-2--line-height: 1.25rem;
-  --text-title-2--font-weight: 500;
+  /* 시안 Title 2 = SemiBold(600). 기존 500 은 오식이었음 */
+  --text-title-2--font-weight: 600;
 
   --text-title-3: 0.875rem;
   --text-title-3--line-height: 1.25rem;

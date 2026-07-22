@@ -40,7 +40,7 @@ function SidebarGroupLabel({ className, ...props }: React.ComponentProps<"div">)
   return (
     <div
       data-slot="sidebar-group-label"
-      className={cn("flex w-full items-center py-3 text-title-1 text-text-primary", className)}
+      className={cn("flex w-full items-center px-3 py-3 text-title-1 text-text-primary", className)}
       {...props}
     />
   );
@@ -48,13 +48,15 @@ function SidebarGroupLabel({ className, ...props }: React.ComponentProps<"div">)
 
 const sidebarMenuItemVariants = cva(
   // 공통: 가로 배치 + 아이콘/라벨 간격, radius, 상태 전환. 아이콘 크기 통일.
-  "group/sidebar-item flex w-full cursor-pointer items-center gap-2 rounded-md border border-transparent bg-transparent py-3 text-left whitespace-nowrap outline-none transition-colors select-none hover:bg-bg-secondary active:bg-bg-secondary focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:text-text-disabled data-selected:bg-brand-tint data-selected:text-text-brand data-selected:font-bold [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  // 시안: 선택 시 배경 없음 — 텍스트 색만 brand(빨강)로. 항목은 px 없이 플러시 정렬.
+  "group/sidebar-item flex w-full cursor-pointer items-center gap-2 rounded-md border border-transparent bg-transparent py-3 text-left whitespace-nowrap outline-none transition-colors select-none hover:bg-bg-secondary focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:text-text-disabled data-selected:text-text-brand [&_svg]:pointer-events-none [&_svg]:shrink-0",
   {
     variants: {
-      // Figma size: md(주 항목·text-primary) / sm(하위 항목·text-secondary)
+      // 시안: md(주 항목: 홈/인기/직군별 = Title 1·text-primary) / sm(하위 항목: 학생~ = Title 2·text-secondary)
+      // px-3: hover 배경이 텍스트에 붙지 않도록 여백 확보(그룹라벨도 동일 px 로 정렬)
       size: {
-        md: "text-title-1 px-2 text-text-primary [&_svg:not([class*='size-'])]:size-5",
-        sm: "text-title-1 px-2 text-text-secondary [&_svg:not([class*='size-'])]:size-4",
+        md: "text-title-1 px-3 text-text-primary [&_svg:not([class*='size-'])]:size-5",
+        sm: "text-title-2 px-3 text-text-secondary [&_svg:not([class*='size-'])]:size-4",
       },
     },
     defaultVariants: {
@@ -88,7 +90,8 @@ function SidebarMenuItem({
       {
         className: cn(sidebarMenuItemVariants({ size }), className),
         // active 를 data 속성 + aria-current 로 매핑 (시안 selected 스타일 트리거)
-        ...(active ? { "data-selected": "" } : {}),
+        // Tailwind v4 는 data-selected: 를 [data-selected="true"] 로 컴파일하므로 값은 반드시 "true".
+        ...(active ? { "data-selected": "true" } : {}),
         "aria-current": active ? ("page" as const) : undefined,
       },
       props,
